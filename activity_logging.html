@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Activity Logging - Moola</title>
+    <link rel="stylesheet" href="../css/main.css" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ffarmtracke6771back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 opacity-5 pointer-events-none">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width=" 60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%232D5016" fill-opacity="0.1"><path d="M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm0 0c0 11.046 8.954 20 20 20s20-8.954 20-20-8.954-20-20-20-20 8.954-20 20z"></path></g>'); background-size: 60px 60px;"></g></div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-agricultural-md border-b border-border-light relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="inline-flex items-center justify-center w-10 h-10 bg-primary rounded-lg shadow-agricultural-md">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                                <path d="M12 16C12 18.21 10.21 20 8 20S4 18.21 4 20C4 17.79 5.79 16 8 16S12 17.79 12 16Z"/>
+                                <path d="M20 16C20 18.21 18.21 20 16 20S12 18.21 12 20C12 17.79 13.79 16 16 16S20 17.79 20 16Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-lg font-heading font-bold text-text-primary">Moola</h1>
+                        <p class="text-xs text-text-secondary hidden sm:block">Activity Logging</p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="dashboard.html" class="text-text-secondary hover:text-primary transition-agricultural font-medium">Dashboard</a>
+                    <a href="activity_logging.html" class="text-primary font-medium border-b-2 border-primary pb-1">Log Activity</a>
+                    <a href="problem_diagnosis.html" class="text-text-secondary hover:text-primary transition-agricultural font-medium">Diagnose</a>
+                    <a href="farm_analytics.html" class="text-text-secondary hover:text-primary transition-agricultural font-medium">Analytics</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-text-secondary hover:text-primary transition-agricultural p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden bg-white border-t border-border-light">
+            <div class="px-4 py-2 space-y-1">
+                <a href="dashboard.html" class="block px-3 py-2 text-text-secondary hover:text-primary hover:bg-primary-50 rounded-lg transition-agricultural">Dashboard</a>
+                <a href="activity_logging.html" class="block px-3 py-2 text-primary bg-primary-50 rounded-lg font-medium">Log Activity</a>
+                <a href="problem_diagnosis.html" class="block px-3 py-2 text-text-secondary hover:text-primary hover:bg-primary-50 rounded-lg transition-agricultural">Diagnose</a>
+                <a href="farm_analytics.html" class="block px-3 py-2 text-text-secondary hover:text-primary hover:bg-primary-50 rounded-lg transition-agricultural">Analytics</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+            <!-- Activity Form -->
+            <div class="lg:col-span-2">
+                <!-- Page Header -->
+                <div class="mb-6">
+                    <h2 class="text-2xl font-heading font-bold text-text-primary mb-2">Log Farm Activity</h2>
+                    <p class="text-text-secondary">Record detailed farm activities for AI analysis and tracking</p>
+                </div>
+
+                <!-- Activity Form Card -->
+                <div class="bg-white rounded-xl shadow-agricultural-lg border border-border-light">
+                    <form id="activityForm" class="p-6 space-y-6">
+                        <!-- Essential Fields Section -->
+                        <div class="space-y-4">
+                            <!-- Activity Type -->
+                            <div>
+                                <label for="activityType" class="block text-sm font-medium text-text-primary mb-2">
+                                    Activity Type *
+                                </label>
+                                <select id="activityType" name="activityType" required class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white">
+                                    <option value>Select activity type</option>
+                                    <option value="watering">Watering</option>
+                                    <option value="fertilizing">Fertilizing</option>
+                                    <option value="planting">Planting</option>
+                                    <option value="harvesting">Harvesting</option>
+                                    <option value="pruning">Pruning</option>
+                                    <option value="pest_control">Pest Control</option>
+                                    <option value="soil_preparation">Soil Preparation</option>
+                                    <option value="weeding">Weeding</option>
+                                    <option value="monitoring">Plant Monitoring</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Date and Time -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="activityDate" class="block text-sm font-medium text-text-primary mb-2">
+                                        Date *
+                                    </label>
+                                    <input type="date" id="activityDate" name="activityDate" required class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white" />
+                                </div>
+                                <div>
+                                    <label for="activityTime" class="block text-sm font-medium text-text-primary mb-2">
+                                        Time *
+                                    </label>
+                                    <input type="time" id="activityTime" name="activityTime" required class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white" />
+                                </div>
+                            </div>
+
+                            <!-- Location -->
+                            <div>
+                                <label for="location" class="block text-sm font-medium text-text-primary mb-2">
+                                    Farm Location/Area *
+                                </label>
+                                <select id="location" name="location" required class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white">
+                                    <option value>Select location</option>
+                                    <option value="north_field">North Field</option>
+                                    <option value="south_field">South Field</option>
+                                    <option value="greenhouse_1">Greenhouse 1</option>
+                                    <option value="greenhouse_2">Greenhouse 2</option>
+                                    <option value="vegetable_garden">Vegetable Garden</option>
+                                    <option value="orchard">Orchard</option>
+                                    <option value="nursery">Nursery</option>
+                                    <option value="storage_area">Storage Area</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Contextual Fields (Dynamic based on activity type) -->
+                        <div id="contextualFields" class="space-y-4 hidden">
+                            <!-- Fertilizing Fields -->
+                            <div id="fertilizingFields" class="space-y-4 hidden">
+                                <h4 class="text-lg font-heading font-semibold text-text-primary border-b border-border-light pb-2">Fertilizer Details</h4>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="fertilizerType" class="block text-sm font-medium text-text-primary mb-2">Fertilizer Type</label>
+                                        <input type="text" id="fertilizerType" name="fertilizerType" placeholder="e.g., NPK 10-10-10" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white" />
+                                    </div>
+                                    <div>
+                                        <label for="fertilizerAmount" class="block text-sm font-medium text-text-primary mb-2">Amount Applied</label>
+                                        <input type="text" id="fertilizerAmount" name="fertilizerAmount" placeholder="e.g., 2 lbs per 100 sq ft" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Planting Fields -->
+                            <div id="plantingFields" class="space-y-4 hidden">
+                                <h4 class="text-lg font-heading font-semibold text-text-primary border-b border-border-light pb-2">Planting Details</h4>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="seedVariety" class="block text-sm font-medium text-text-primary mb-2">Seed/Plant Variety</label>
+                                        <input type="text" id="seedVariety" name="seedVariety" placeholder="e.g., Cherokee Purple Tomato" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white" />
+                                    </div>
+                                    <div>
+                                        <label for="plantingDensity" class="block text-sm font-medium text-text-primary mb-2">Planting Density</label>
+                                        <input type="text" id="plantingDensity" name="plantingDensity" placeholder="e.g., 12 inches apart" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Weather Conditions -->
+                            <div id="weatherFields" class="space-y-4 hidden">
+                                <h4 class="text-lg font-heading font-semibold text-text-primary border-b border-border-light pb-2">Weather Conditions</h4>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                    <div>
+                                        <label for="temperature" class="block text-sm font-medium text-text-primary mb-2">Temperature (°F)</label>
+                                        <input type="number" id="temperature" name="temperature" placeholder="75" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white" />
+                                    </div>
+                                    <div>
+                                        <label for="humidity" class="block text-sm font-medium text-text-primary mb-2">Humidity (%)</label>
+                                        <input type="number" id="humidity" name="humidity" placeholder="65" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white" />
+                                    </div>
+                                    <div>
+                                        <label for="weatherCondition" class="block text-sm font-medium text-text-primary mb-2">Condition</label>
+                                        <select id="weatherCondition" name="weatherCondition" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white">
+                                            <option value>Select condition</option>
+                                            <option value="sunny">Sunny</option>
+                                            <option value="partly_cloudy">Partly Cloudy</option>
+                                            <option value="cloudy">Cloudy</option>
+                                            <option value="rainy">Rainy</option>
+                                            <option value="windy">Windy</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Activity Notes -->
+                        <div>
+                            <label for="activityNotes" class="block text-sm font-medium text-text-primary mb-2">
+                                Activity Notes *
+                            </label>
+                            <textarea id="activityNotes" name="activityNotes" rows="4" required placeholder="Describe the activity in detail. Include observations about plant health, soil conditions, or any issues encountered..." class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white resize-none" maxlength="500"></textarea>
+                            <div class="flex justify-between items-center mt-2">
+                                <p class="text-xs text-text-secondary">Be specific for better AI analysis</p>
+                                <span id="charCount" class="text-xs text-text-secondary">0/500</span>
+                            </div>
+                        </div>
+
+                        <!-- Photo Upload -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">
+                                Activity Photos
+                            </label>
+                            <div class="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-agricultural">
+                                <input type="file" id="photoUpload" name="photos" multiple accept="image/*" class="hidden" />
+                                <div id="uploadArea" class="cursor-pointer">
+                                    <svg class="mx-auto h-12 w-12 text-text-secondary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                    <p class="text-text-secondary mb-2">Click to upload photos or drag and drop</p>
+                                    <p class="text-xs text-text-secondary">PNG, JPG up to 10MB each</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Photo Previews -->
+                            <div id="photoPreview" class="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 hidden"></div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="flex flex-col sm:flex-row gap-3 pt-6 border-t border-border-light">
+                            <button type="button" id="saveDraftBtn" class="flex-1 bg-surface hover:bg-border-light text-text-primary font-medium py-3 px-6 rounded-lg transition-agricultural border border-border">
+                                <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12"/>
+                                </svg>
+                                Save Draft
+                            </button>
+                            <button type="submit" class="flex-1 bg-primary hover:bg-primary-600 text-white font-medium py-3 px-6 rounded-lg transition-agricultural shadow-agricultural-md hover:shadow-agricultural-lg min-h-touch">
+                                <span id="submitText">
+                                    <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    Log Activity
+                                </span>
+                                <span id="submitLoader" class="hidden">
+                                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                                    </svg>
+                                    Saving...
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Activity History Sidebar -->
+            <div class="lg:col-span-1 mt-8 lg:mt-0">
+                <div class="bg-white rounded-xl shadow-agricultural-lg border border-border-light p-6">
+                    <h3 class="text-lg font-heading font-semibold text-text-primary mb-4">Recent Activities</h3>
+                    
+                    <!-- Activity History Items -->
+                    <div class="space-y-4">
+                        <!-- Activity Item 1 -->
+                        <div class="border-l-4 border-success pl-4 py-2">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-sm font-medium text-text-primary">Watering</span>
+                                <span class="text-xs text-text-secondary">2 hours ago</span>
+                            </div>
+                            <p class="text-xs text-text-secondary">North Field - Tomato plants</p>
+                            <div class="flex items-center mt-1">
+                                <svg class="w-3 h-3 text-success mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-xs text-success">Completed</span>
+                            </div>
+                        </div>
+
+                        <!-- Activity Item 2 -->
+                        <div class="border-l-4 border-accent pl-4 py-2">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-sm font-medium text-text-primary">Fertilizing</span>
+                                <span class="text-xs text-text-secondary">Yesterday</span>
+                            </div>
+                            <p class="text-xs text-text-secondary">Vegetable Garden - NPK 10-10-10</p>
+                            <div class="flex items-center mt-1">
+                                <svg class="w-3 h-3 text-accent mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-xs text-accent">Completed</span>
+                            </div>
+                        </div>
+
+                        <!-- Activity Item 3 -->
+                        <div class="border-l-4 border-primary pl-4 py-2">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-sm font-medium text-text-primary">Planting</span>
+                                <span class="text-xs text-text-secondary">3 days ago</span>
+                            </div>
+                            <p class="text-xs text-text-secondary">Greenhouse 1 - Pepper seedlings</p>
+                            <div class="flex items-center mt-1">
+                                <svg class="w-3 h-3 text-primary mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-xs text-primary">Completed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- View All Activities Link -->
+                    <div class="mt-6 pt-4 border-t border-border-light">
+                        <a href="dashboard.html" class="text-primary hover:text-primary-600 text-sm font-medium transition-agricultural flex items-center">
+                            View all activities
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Tips -->
+                <div class="bg-primary-50 rounded-xl border border-primary-200 p-6 mt-6">
+                    <h4 class="text-sm font-heading font-semibold text-primary mb-3">💡 Logging Tips</h4>
+                    <ul class="text-xs text-primary space-y-2">
+                        <li>• Include specific details for better AI analysis</li>
+                        <li>• Take photos before and after activities</li>
+                        <li>• Note weather conditions for outdoor work</li>
+                        <li>• Save drafts to prevent data loss</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Toast -->
+    <div id="successToast" class="fixed top-4 right-4 bg-success text-white px-6 py-3 rounded-lg shadow-agricultural-lg transform translate-x-full transition-agricultural z-50">
+        <div class="flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Activity logged successfully!</span>
+        </div>
+    </div>
+
+    <!-- Agricultural Background Elements -->
+    <div class="fixed bottom-0 left-0 w-full h-32 bg-gradient-to-t from-primary-50/30 to-transparent pointer-events-none"></div>
+
+    <script>
+        // Initialize form with current date and time
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const today = now.toISOString().split('T')[0];
+            const currentTime = now.toTimeString().slice(0, 5);
+            
+            document.getElementById('activityDate').value = today;
+            document.getElementById('activityTime').value = currentTime;
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Activity type change handler
+        document.getElementById('activityType').addEventListener('change', function() {
+            const activityType = this.value;
+            const contextualFields = document.getElementById('contextualFields');
+            const fertilizingFields = document.getElementById('fertilizingFields');
+            const plantingFields = document.getElementById('plantingFields');
+            const weatherFields = document.getElementById('weatherFields');
+
+            // Hide all contextual fields first
+            contextualFields.classList.add('hidden');
+            fertilizingFields.classList.add('hidden');
+            plantingFields.classList.add('hidden');
+            weatherFields.classList.add('hidden');
+
+            // Show relevant fields based on activity type
+            if (activityType) {
+                contextualFields.classList.remove('hidden');
+                
+                if (activityType === 'fertilizing') {
+                    fertilizingFields.classList.remove('hidden');
+                }
+                
+                if (activityType === 'planting') {
+                    plantingFields.classList.remove('hidden');
+                }
+                
+                // Show weather fields for outdoor activities
+                if (['watering', 'fertilizing', 'planting', 'harvesting', 'pruning', 'weeding'].includes(activityType)) {
+                    weatherFields.classList.remove('hidden');
+                }
+            }
+        });
+
+        // Character count for notes
+        document.getElementById('activityNotes').addEventListener('input', function() {
+            const charCount = document.getElementById('charCount');
+            const currentLength = this.value.length;
+            charCount.textContent = `${currentLength}/500`;
+            
+            if (currentLength > 450) {
+                charCount.classList.add('text-warning');
+            } else {
+                charCount.classList.remove('text-warning');
+            }
+        });
+
+        // Photo upload handling
+        const photoUpload = document.getElementById('photoUpload');
+        const uploadArea = document.getElementById('uploadArea');
+        const photoPreview = document.getElementById('photoPreview');
+        let uploadedFiles = [];
+
+        uploadArea.addEventListener('click', () => photoUpload.click());
+
+        photoUpload.addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            files.forEach(file => {
+                if (file.type.startsWith('image/') && file.size <= 10 * 1024 * 1024) {
+                    uploadedFiles.push(file);
+                    createPhotoPreview(file);
+                }
+            });
+            
+            if (uploadedFiles.length > 0) {
+                photoPreview.classList.remove('hidden');
+            }
+        });
+
+        function createPhotoPreview(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const previewDiv = document.createElement('div');
+                previewDiv.className = 'relative group';
+                previewDiv.innerHTML = `
+                    <img src="${e.target.result}" alt="Preview" class="w-full h-24 object-cover rounded-lg border border-border">
+                    <button type="button" class="absolute -top-2 -right-2 bg-error text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-error-600 transition-agricultural opacity-0 group-hover:opacity-100" onclick="removePhoto(this, '${file.name}')">
+                        ×
+                    </button>
+                `;
+                photoPreview.appendChild(previewDiv);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removePhoto(button, fileName) {
+            uploadedFiles = uploadedFiles.filter(file => file.name !== fileName);
+            button.parentElement.remove();
+            
+            if (uploadedFiles.length === 0) {
+                photoPreview.classList.add('hidden');
+            }
+        }
+
+        // Draft saving
+        document.getElementById('saveDraftBtn').addEventListener('click', function() {
+            const formData = new FormData(document.getElementById('activityForm'));
+            const draftData = Object.fromEntries(formData.entries());
+            
+            // Save to localStorage
+            localStorage.setItem('activityDraft', JSON.stringify(draftData));
+            
+            // Show success feedback
+            showToast('Draft saved successfully!');
+        });
+
+        // Load draft on page load
+        function loadDraft() {
+            const draft = localStorage.getItem('activityDraft');
+            if (draft) {
+                const draftData = JSON.parse(draft);
+                Object.keys(draftData).forEach(key => {
+                    const field = document.querySelector(`[name="${key}"]`);
+                    if (field) {
+                        field.value = draftData[key];
+                        if (field.type === 'select-one') {
+                            field.dispatchEvent(new Event('change'));
+                        }
+                    }
+                });
+            }
+        }
+
+        // Form submission
+        document.getElementById('activityForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitText = document.getElementById('submitText');
+            const submitLoader = document.getElementById('submitLoader');
+            
+            // Show loading state
+            submitText.classList.add('hidden');
+            submitLoader.classList.remove('hidden');
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Clear draft
+                localStorage.removeItem('activityDraft');
+                
+                // Show success
+                showToast('Activity logged successfully!');
+                
+                // Reset form
+                this.reset();
+                photoPreview.classList.add('hidden');
+                photoPreview.innerHTML = '';
+                uploadedFiles = [];
+                document.getElementById('contextualFields').classList.add('hidden');
+                
+                // Reset date and time to current
+                const now = new Date();
+                document.getElementById('activityDate').value = now.toISOString().split('T')[0];
+                document.getElementById('activityTime').value = now.toTimeString().slice(0, 5);
+                
+                // Reset loading state
+                submitText.classList.remove('hidden');
+                submitLoader.classList.add('hidden');
+                
+                // Reset character count
+                document.getElementById('charCount').textContent = '0/500';
+            }, 2000);
+        });
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('successToast');
+            toast.querySelector('span').textContent = message;
+            toast.classList.remove('translate-x-full');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 3000);
+        }
+
+        // Form validation
+        const requiredFields = document.querySelectorAll('input[required], select[required], textarea[required]');
+        requiredFields.forEach(field => {
+            field.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.classList.add('border-error');
+                } else {
+                    this.classList.remove('border-error');
+                }
+            });
+            
+            field.addEventListener('input', function() {
+                if (this.classList.contains('border-error') && this.value.trim()) {
+                    this.classList.remove('border-error');
+                }
+            });
+        });
+
+        // Load draft on page load
+        loadDraft();
+
+        // Auto-save draft every 30 seconds
+        setInterval(() => {
+            const form = document.getElementById('activityForm');
+            const formData = new FormData(form);
+            const hasData = Array.from(formData.values()).some(value => value.trim() !== '');
+            
+            if (hasData) {
+                const draftData = Object.fromEntries(formData.entries());
+                localStorage.setItem('activityDraft', JSON.stringify(draftData));
+            }
+        }, 30000);
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

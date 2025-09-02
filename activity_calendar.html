@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Activity Calendar - FarmTracker Pro</title>
+    <link rel="stylesheet" href="../css/main.css" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ffarmtracke6771back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 opacity-5 pointer-events-none">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width=" 60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%232D5016" fill-opacity="0.1"><path d="M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm0 0c0 11.046 8.954 20 20 20s20-8.954 20-20-8.954-20-20-20-20 8.954-20 20z"></path></g>'); background-size: 60px 60px;"></g></div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white border-b border-border-light shadow-agricultural">
+        <div class="px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo & Brand -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="inline-flex items-center">
+                            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                                    <path d="M12 16C12 18.21 10.21 20 8 20S4 18.21 4 20C4 17.79 5.79 16 8 16S12 17.79 12 16Z"/>
+                                    <path d="M20 16C20 18.21 18.21 20 16 20S12 18.21 12 20C12 17.79 13.79 16 16 16S20 17.79 20 16Z"/>
+                                </svg>
+                            </div>
+                            <span class="text-xl font-heading font-bold text-text-primary">FarmTracker Pro</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="dashboard.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md hover:bg-primary-50 transition-agricultural">
+                        Dashboard
+                    </a>
+                    <a href="activity_logging.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md hover:bg-primary-50 transition-agricultural">
+                        Log Activity
+                    </a>
+                    <a href="problem_diagnosis.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md hover:bg-primary-50 transition-agricultural">
+                        Diagnose
+                    </a>
+                    <a href="farm_analytics.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md hover:bg-primary-50 transition-agricultural">
+                        Analytics
+                    </a>
+                    <a href="activity_calendar.html" class="text-primary font-medium px-3 py-2 rounded-md bg-primary-50 transition-agricultural">
+                        Calendar
+                    </a>
+                </nav>
+
+                <!-- User Menu & Mobile Toggle -->
+                <div class="flex items-center space-x-4">
+                    <!-- User Avatar -->
+                    <div class="relative">
+                        <button id="userMenuButton" class="flex items-center space-x-2 text-text-secondary hover:text-primary transition-agricultural">
+                            <img class="w-8 h-8 rounded-full border-2 border-primary-200" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3" alt="User Avatar" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <span class="hidden sm:block text-sm font-medium">John Farmer</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        
+                        <!-- Dropdown Menu -->
+                        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-agricultural-lg border border-border-light">
+                            <div class="py-1">
+                                <a href="javascript:void(0)" class="block px-4 py-2 text-sm text-text-secondary hover:bg-primary-50 hover:text-primary transition-agricultural">Profile Settings</a>
+                                <a href="javascript:void(0)" class="block px-4 py-2 text-sm text-text-secondary hover:bg-primary-50 hover:text-primary transition-agricultural">Farm Settings</a>
+                                <div class="border-t border-border-light"></div>
+                                <a href="login.html" class="block px-4 py-2 text-sm text-text-secondary hover:bg-primary-50 hover:text-primary transition-agricultural">Sign Out</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-md text-text-secondary hover:text-primary hover:bg-primary-50 transition-agricultural">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-border-light bg-white">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="dashboard.html" class="block px-3 py-2 rounded-md text-text-secondary hover:text-primary hover:bg-primary-50 transition-agricultural">Dashboard</a>
+                <a href="activity_logging.html" class="block px-3 py-2 rounded-md text-text-secondary hover:text-primary hover:bg-primary-50 transition-agricultural">Log Activity</a>
+                <a href="problem_diagnosis.html" class="block px-3 py-2 rounded-md text-text-secondary hover:text-primary hover:bg-primary-50 transition-agricultural">Diagnose</a>
+                <a href="farm_analytics.html" class="block px-3 py-2 rounded-md text-text-secondary hover:text-primary hover:bg-primary-50 transition-agricultural">Analytics</a>
+                <a href="activity_calendar.html" class="block px-3 py-2 rounded-md text-primary font-medium bg-primary-50">Calendar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Header Section -->
+        <div class="mb-6">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div class="mb-4 sm:mb-0">
+                    <h1 class="text-2xl sm:text-3xl font-heading font-bold text-text-primary">Activity Calendar</h1>
+                    <p class="text-text-secondary mt-1">Schedule and track all your farm activities</p>
+                </div>
+                
+                <!-- View Controls -->
+                <div class="flex items-center space-x-2">
+                    <div class="flex bg-white rounded-lg border border-border-light shadow-agricultural">
+                        <button id="monthViewBtn" class="px-4 py-2 text-sm font-medium text-white bg-primary rounded-l-lg transition-agricultural">
+                            Month
+                        </button>
+                        <button id="weekViewBtn" class="px-4 py-2 text-sm font-medium text-text-secondary hover:text-primary hover:bg-primary-50 transition-agricultural">
+                            Week
+                        </button>
+                        <button id="dayViewBtn" class="px-4 py-2 text-sm font-medium text-text-secondary hover:text-primary hover:bg-primary-50 rounded-r-lg transition-agricultural">
+                            Day
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar Controls -->
+            <div class="flex items-center justify-between mt-6 bg-white rounded-lg border border-border-light p-4 shadow-agricultural-md">
+                <div class="flex items-center space-x-4">
+                    <button id="prevBtn" class="p-2 rounded-lg text-text-secondary hover:text-primary hover:bg-primary-50 transition-agricultural">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <h2 id="monthYear" class="text-xl font-heading font-semibold text-text-primary">August 2025</h2>
+                    <button id="nextBtn" class="p-2 rounded-lg text-text-secondary hover:text-primary hover:bg-primary-50 transition-agricultural">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Filter Controls -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <label for="activityFilter" class="text-sm font-medium text-text-secondary">Filter:</label>
+                        <select id="activityFilter" class="border border-border-light rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="all">All Activities</option>
+                            <option value="watering">Watering</option>
+                            <option value="fertilizing">Fertilizing</option>
+                            <option value="planting">Planting</option>
+                            <option value="harvesting">Harvesting</option>
+                            <option value="pest_control">Pest Control</option>
+                        </select>
+                    </div>
+                    <button id="todayBtn" class="px-3 py-2 text-sm font-medium text-text-secondary hover:text-primary hover:bg-primary-50 border border-border-light rounded-lg transition-agricultural">
+                        Today
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- Main Calendar -->
+            <div class="lg:col-span-3">
+                <div class="bg-white rounded-xl shadow-agricultural-md border border-border-light overflow-hidden">
+                    <!-- Calendar Header -->
+                    <div class="grid grid-cols-7 bg-primary text-white">
+                        <div class="p-3 text-center text-sm font-medium">Sun</div>
+                        <div class="p-3 text-center text-sm font-medium">Mon</div>
+                        <div class="p-3 text-center text-sm font-medium">Tue</div>
+                        <div class="p-3 text-center text-sm font-medium">Wed</div>
+                        <div class="p-3 text-center text-sm font-medium">Thu</div>
+                        <div class="p-3 text-center text-sm font-medium">Fri</div>
+                        <div class="p-3 text-center text-sm font-medium">Sat</div>
+                    </div>
+                    
+                    <!-- Calendar Days -->
+                    <div id="calendarGrid" class="grid grid-cols-7">
+                        <!-- Days will be generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Quick Add Activity -->
+                <div class="bg-white rounded-xl shadow-agricultural-md border border-border-light">
+                    <div class="p-6 border-b border-border-light">
+                        <h3 class="text-lg font-heading font-semibold text-text-primary">Quick Schedule</h3>
+                    </div>
+                    <div class="p-6">
+                        <form id="quickAddForm" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-text-secondary mb-2">Activity Type</label>
+                                <select id="activityType" class="w-full border border-border-light rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="watering">💧 Watering</option>
+                                    <option value="fertilizing">🌱 Fertilizing</option>
+                                    <option value="planting">🌿 Planting</option>
+                                    <option value="harvesting">🌾 Harvesting</option>
+                                    <option value="pest_control">🐛 Pest Control</option>
+                                    <option value="soil_testing">🧪 Soil Testing</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-text-secondary mb-2">Location</label>
+                                <select id="activityLocation" class="w-full border border-border-light rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="tomato_field_a">Tomato Field A</option>
+                                    <option value="corn_field_b">Corn Field B</option>
+                                    <option value="greenhouse_1">Greenhouse 1</option>
+                                    <option value="lettuce_rows">Lettuce Rows</option>
+                                    <option value="herb_garden">Herb Garden</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-text-secondary mb-2">Date & Time</label>
+                                <input type="datetime-local" id="activityDateTime" class="w-full border border-border-light rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent" />
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-text-secondary mb-2">Notes (Optional)</label>
+                                <textarea id="activityNotes" rows="3" class="w-full border border-border-light rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Additional details..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-primary hover:bg-primary-600 text-white font-medium py-3 px-4 rounded-lg transition-agricultural shadow-agricultural-md hover:shadow-agricultural-lg">
+                                Schedule Activity
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Upcoming Tasks -->
+                <div class="bg-white rounded-xl shadow-agricultural-md border border-border-light">
+                    <div class="p-6 border-b border-border-light">
+                        <h3 class="text-lg font-heading font-semibold text-text-primary">Upcoming Tasks</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-3">
+                            <!-- Task 1 -->
+                            <div class="flex items-center space-x-3 p-3 bg-error-50 rounded-lg border border-error-200">
+                                <div class="w-2 h-2 bg-error rounded-full flex-shrink-0"></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-text-primary">Water Greenhouse 2</p>
+                                    <p class="text-xs text-error">Overdue by 2 hours</p>
+                                </div>
+                                <span class="text-xs text-error font-medium">9:00 AM</span>
+                            </div>
+
+                            <!-- Task 2 -->
+                            <div class="flex items-center space-x-3 p-3 bg-warning-50 rounded-lg border border-warning-200">
+                                <div class="w-2 h-2 bg-warning rounded-full flex-shrink-0"></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-text-primary">Check Irrigation System</p>
+                                    <p class="text-xs text-warning">Due in 30 minutes</p>
+                                </div>
+                                <span class="text-xs text-warning font-medium">4:00 PM</span>
+                            </div>
+
+                            <!-- Task 3 -->
+                            <div class="flex items-center space-x-3 p-3 bg-primary-50 rounded-lg border border-primary-200">
+                                <div class="w-2 h-2 bg-primary rounded-full flex-shrink-0"></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-text-primary">Evening Harvest</p>
+                                    <p class="text-xs text-primary">Scheduled</p>
+                                </div>
+                                <span class="text-xs text-primary font-medium">6:00 PM</span>
+                            </div>
+
+                            <!-- Task 4 -->
+                            <div class="flex items-center space-x-3 p-3 bg-accent-50 rounded-lg border border-accent-200">
+                                <div class="w-2 h-2 bg-accent rounded-full flex-shrink-0"></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-text-primary">Apply Fertilizer</p>
+                                    <p class="text-xs text-accent">Tomorrow 8:00 AM</p>
+                                </div>
+                                <span class="text-xs text-accent font-medium">Aug 26</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <a href="activity_logging.html" class="w-full bg-secondary hover:bg-secondary-600 text-white font-medium py-2 px-4 rounded-lg transition-agricultural shadow-agricultural-md hover:shadow-agricultural-lg flex items-center justify-center space-x-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                </svg>
+                                <span>Log Activity</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Legend -->
+                <div class="bg-white rounded-xl shadow-agricultural-md border border-border-light">
+                    <div class="p-6 border-b border-border-light">
+                        <h3 class="text-lg font-heading font-semibold text-text-primary">Activity Legend</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 bg-success rounded"></div>
+                                <span class="text-sm text-text-secondary">💧 Watering</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 bg-primary rounded"></div>
+                                <span class="text-sm text-text-secondary">🌱 Fertilizing</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 bg-accent rounded"></div>
+                                <span class="text-sm text-text-secondary">🌿 Planting</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 bg-warning rounded"></div>
+                                <span class="text-sm text-text-secondary">🌾 Harvesting</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 bg-error rounded"></div>
+                                <span class="text-sm text-text-secondary">🐛 Pest Control</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 bg-secondary rounded"></div>
+                                <span class="text-sm text-text-secondary">🧪 Other</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Button for Mobile -->
+    <div class="fixed bottom-6 right-6 md:hidden">
+        <button id="mobileAddBtn" class="w-14 h-14 bg-primary hover:bg-primary-600 text-white rounded-full shadow-agricultural-lg hover:shadow-agricultural-md transition-agricultural flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Day Detail Modal -->
+    <div id="dayModal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Background overlay -->
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+            <!-- Modal panel -->
+            <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+                <div class="sm:flex sm:items-start">
+                    <div class="w-full">
+                        <h3 id="modalTitle" class="text-lg leading-6 font-heading font-semibold text-text-primary">
+                            Activities for August 25, 2025
+                        </h3>
+                        <div class="mt-4">
+                            <div id="modalContent" class="space-y-3">
+                                <!-- Activities will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                    <button id="closeModal" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agricultural Background Elements -->
+    <div class="fixed bottom-0 left-0 w-full h-32 bg-gradient-to-t from-primary-50/30 to-transparent pointer-events-none"></div>
+
+    <script>
+        // Calendar data and state
+        let currentDate = new Date();
+        let currentView = 'month';
+        let selectedDate = null;
+
+        // Sample activities data
+        const activities = [
+            {
+                id: 1,
+                type: 'watering',
+                title: 'Water Greenhouse 2',
+                location: 'Greenhouse 1',
+                date: new Date(2025, 7, 25, 9, 0), // August 25, 2025, 9:00 AM
+                status: 'overdue',
+                notes: 'Check soil moisture first'
+            },
+            {
+                id: 2,
+                type: 'fertilizing',
+                title: 'Apply Organic Fertilizer',
+                location: 'Tomato Field A',
+                date: new Date(2025, 7, 26, 8, 0), // August 26, 2025, 8:00 AM
+                status: 'scheduled',
+                notes: 'Use nitrogen-rich fertilizer'
+            },
+            {
+                id: 3,
+                type: 'harvesting',
+                title: 'Harvest Lettuce',
+                location: 'Lettuce Rows',
+                date: new Date(2025, 7, 25, 18, 0), // August 25, 2025, 6:00 PM
+                status: 'scheduled',
+                notes: 'Early morning harvest for best quality'
+            },
+            {
+                id: 4,
+                type: 'pest_control',
+                title: 'Inspect for Aphids',
+                location: 'Corn Field B',
+                date: new Date(2025, 7, 27, 10, 0), // August 27, 2025, 10:00 AM
+                status: 'scheduled',
+                notes: 'Check undersides of leaves'
+            },
+            {
+                id: 5,
+                type: 'planting',
+                title: 'Plant Winter Vegetables',
+                location: 'Herb Garden',
+                date: new Date(2025, 7, 28, 14, 0), // August 28, 2025, 2:00 PM
+                status: 'scheduled',
+                notes: 'Kale, spinach, and carrots'
+            },
+            {
+                id: 6,
+                type: 'watering',
+                title: 'Deep Water Root Vegetables',
+                location: 'Tomato Field A',
+                date: new Date(2025, 7, 25, 16, 0), // August 25, 2025, 4:00 PM
+                status: 'completed',
+                notes: 'Applied 150L water'
+            }
+        ];
+
+        // Utility functions
+        function getActivityColor(type) {
+            const colors = {
+                watering: 'bg-success',
+                fertilizing: 'bg-primary',
+                planting: 'bg-accent',
+                harvesting: 'bg-warning',
+                pest_control: 'bg-error',
+                soil_testing: 'bg-secondary'
+            };
+            return colors[type] || 'bg-secondary';
+        }
+
+        function getActivityIcon(type) {
+            const icons = {
+                watering: '💧',
+                fertilizing: '🌱',
+                planting: '🌿',
+                harvesting: '🌾',
+                pest_control: '🐛',
+                soil_testing: '🧪'
+            };
+            return icons[type] || '📝';
+        }
+
+        function formatDate(date) {
+            return date.toLocaleDateString('en-US', { 
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            });
+        }
+
+        function isSameDay(date1, date2) {
+            return date1.getFullYear() === date2.getFullYear() &&
+                   date1.getMonth() === date2.getMonth() &&
+                   date1.getDate() === date2.getDate();
+        }
+
+        // Calendar generation
+        function generateCalendar() {
+            const calendarGrid = document.getElementById('calendarGrid');
+            const monthYearElement = document.getElementById('monthYear');
+            
+            // Update month/year display
+            monthYearElement.textContent = currentDate.toLocaleDateString('en-US', {
+                month: 'long',
+                year: 'numeric'
+            });
+
+            // Clear existing calendar
+            calendarGrid.innerHTML = '';
+
+            // Get first day of month and number of days
+            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+            const startDate = new Date(firstDay);
+            startDate.setDate(startDate.getDate() - firstDay.getDay());
+
+            // Generate calendar days
+            for (let i = 0; i < 42; i++) {
+                const cellDate = new Date(startDate);
+                cellDate.setDate(startDate.getDate() + i);
+
+                const dayElement = createDayElement(cellDate, firstDay, lastDay);
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
+        function createDayElement(date, firstDay, lastDay) {
+            const dayElement = document.createElement('div');
+            const isCurrentMonth = date.getMonth() === currentDate.getMonth();
+            const isToday = isSameDay(date, new Date());
+            
+            // Base classes
+            dayElement.className = `relative min-h-24 border-r border-b border-border-light p-2 cursor-pointer hover:bg-primary-50 transition-agricultural ${
+                isCurrentMonth ? 'bg-white' : 'bg-surface text-text-secondary'
+            } ${
+                isToday ? 'ring-2 ring-primary ring-inset' : ''
+            }`;
+
+            // Day number
+            const dayNumber = document.createElement('div');
+            dayNumber.className = `text-sm font-medium mb-1 ${isToday ? 'text-primary font-bold' : ''}`;
+            dayNumber.textContent = date.getDate();
+            dayElement.appendChild(dayNumber);
+
+            // Add activities for this day
+            const dayActivities = activities.filter(activity => 
+                isSameDay(activity.date, date)
+            );
+
+            dayActivities.forEach((activity, index) => {
+                if (index < 3) { // Show max 3 activities per day
+                    const activityElement = createActivityElement(activity);
+                    dayElement.appendChild(activityElement);
+                }
+            });
+
+            // Show "more" indicator if there are more than 3 activities
+            if (dayActivities.length > 3) {
+                const moreElement = document.createElement('div');
+                moreElement.className = 'text-xs text-text-secondary mt-1';
+                moreElement.textContent = `+${dayActivities.length - 3} more`;
+                dayElement.appendChild(moreElement);
+            }
+
+            // Add click handler
+            dayElement.addEventListener('click', () => {
+                selectedDate = new Date(date);
+                showDayDetails(date, dayActivities);
+            });
+
+            return dayElement;
+        }
+
+        function createActivityElement(activity) {
+            const activityElement = document.createElement('div');
+            const colorClass = getActivityColor(activity.type);
+            const statusClass = activity.status === 'overdue' ? 'ring-2 ring-error' :
+                               activity.status === 'completed' ? 'opacity-75' : '';
+            
+            activityElement.className = `text-xs ${colorClass} text-white px-2 py-1 rounded mb-1 truncate ${statusClass}`;
+            activityElement.textContent = `${getActivityIcon(activity.type)} ${activity.title}`;
+            activityElement.title = `${activity.title} - ${activity.location} (${formatTime(activity.date)})`;
+            
+            return activityElement;
+        }
+
+        function showDayDetails(date, dayActivities) {
+            const modal = document.getElementById('dayModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            modalTitle.textContent = `Activities for ${formatDate(date)}`;
+            modalContent.innerHTML = '';
+
+            if (dayActivities.length === 0) {
+                modalContent.innerHTML = '<p class="text-text-secondary text-center py-4">No activities scheduled for this day.</p>';
+            } else {
+                dayActivities.forEach(activity => {
+                    const activityCard = createDetailActivityCard(activity);
+                    modalContent.appendChild(activityCard);
+                });
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function createDetailActivityCard(activity) {
+            const card = document.createElement('div');
+            const colorClass = getActivityColor(activity.type);
+            const statusBadge = activity.status === 'overdue' ? 'bg-error-50 text-error border-error-200' :
+                               activity.status === 'completed' ? 'bg-success-50 text-success border-success-200' :
+                               'bg-primary-50 text-primary border-primary-200';
+
+            card.className = 'border border-border-light rounded-lg p-4';
+            card.innerHTML = `
+                <div class="flex items-start justify-between">
+                    <div class="flex items-start space-x-3 flex-1">
+                        <div class="w-10 h-10 ${colorClass} rounded-lg flex items-center justify-center text-white">
+                            <span class="text-lg">${getActivityIcon(activity.type)}</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium text-text-primary">${activity.title}</h4>
+                            <p class="text-sm text-text-secondary">${activity.location}</p>
+                            <p class="text-sm text-text-secondary">${formatTime(activity.date)}</p>
+                            ${activity.notes ? `<p class="text-xs text-text-secondary mt-1">${activity.notes}</p>` : ''}
+                        </div>
+                    </div>
+                    <span class="text-xs font-medium px-2 py-1 rounded-full border ${statusBadge}">
+                        ${activity.status.charAt(0).toUpperCase() + activity.status.slice(1)}
+                    </span>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Navigation handlers
+        function navigateCalendar(direction) {
+            if (direction === 'prev') {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+            } else {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+            }
+            generateCalendar();
+        }
+
+        function goToToday() {
+            currentDate = new Date();
+            generateCalendar();
+        }
+
+        // Form handlers
+        function handleQuickAdd(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const activityData = {
+                id: activities.length + 1,
+                type: document.getElementById('activityType').value,
+                title: document.getElementById('activityType').selectedOptions[0].text.slice(2), // Remove emoji
+                location: document.getElementById('activityLocation').selectedOptions[0].text,
+                date: new Date(document.getElementById('activityDateTime').value),
+                status: 'scheduled',
+                notes: document.getElementById('activityNotes').value
+            };
+
+            activities.push(activityData);
+            generateCalendar();
+            
+            // Reset form
+            event.target.reset();
+            
+            // Show success message (could be enhanced with a proper toast)
+            alert('Activity scheduled successfully!');
+        }
+
+        // Initialize calendar
+        function initCalendar() {
+            // Set default datetime to current time + 1 hour
+            const defaultDateTime = new Date();
+            defaultDateTime.setHours(defaultDateTime.getHours() + 1, 0, 0, 0);
+            document.getElementById('activityDateTime').value = defaultDateTime.toISOString().slice(0, 16);
+
+            // Generate initial calendar
+            generateCalendar();
+
+            // Event listeners
+            document.getElementById('prevBtn').addEventListener('click', () => navigateCalendar('prev'));
+            document.getElementById('nextBtn').addEventListener('click', () => navigateCalendar('next'));
+            document.getElementById('todayBtn').addEventListener('click', goToToday);
+            document.getElementById('quickAddForm').addEventListener('submit', handleQuickAdd);
+            document.getElementById('closeModal').addEventListener('click', () => {
+                document.getElementById('dayModal').classList.add('hidden');
+            });
+
+            // View switching (placeholder - would implement different view layouts)
+            document.getElementById('monthViewBtn').addEventListener('click', function() {
+                currentView = 'month';
+                updateViewButtons();
+                // Would implement month view layout
+            });
+
+            document.getElementById('weekViewBtn').addEventListener('click', function() {
+                currentView = 'week';
+                updateViewButtons();
+                // Would implement week view layout
+            });
+
+            document.getElementById('dayViewBtn').addEventListener('click', function() {
+                currentView = 'day';
+                updateViewButtons();
+                // Would implement day view layout
+            });
+
+            // Activity filter
+            document.getElementById('activityFilter').addEventListener('change', function() {
+                // Would implement activity filtering
+                generateCalendar();
+            });
+
+            // Mobile menu functionality
+            document.getElementById('mobileMenuButton').addEventListener('click', function() {
+                const mobileMenu = document.getElementById('mobileMenu');
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // User dropdown
+            document.getElementById('userMenuButton').addEventListener('click', function() {
+                const dropdown = document.getElementById('userDropdown');
+                dropdown.classList.toggle('hidden');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                const userMenuButton = document.getElementById('userMenuButton');
+                const userDropdown = document.getElementById('userDropdown');
+                
+                if (!userMenuButton.contains(event.target) && !userDropdown.contains(event.target)) {
+                    userDropdown.classList.add('hidden');
+                }
+            });
+
+            // Mobile add button
+            document.getElementById('mobileAddBtn').addEventListener('click', function() {
+                // Scroll to quick add form or open modal
+                document.getElementById('activityType').focus();
+            });
+
+            // Close modal when clicking outside
+            document.getElementById('dayModal').addEventListener('click', function(event) {
+                if (event.target === this) {
+                    this.classList.add('hidden');
+                }
+            });
+        }
+
+        function updateViewButtons() {
+            const buttons = {
+                month: document.getElementById('monthViewBtn'),
+                week: document.getElementById('weekViewBtn'),
+                day: document.getElementById('dayViewBtn')
+            };
+
+            Object.keys(buttons).forEach(view => {
+                const button = buttons[view];
+                if (view === currentView) {
+                    button.className = 'px-4 py-2 text-sm font-medium text-white bg-primary rounded-l-lg transition-agricultural';
+                } else {
+                    button.className = 'px-4 py-2 text-sm font-medium text-text-secondary hover:text-primary hover:bg-primary-50 transition-agricultural';
+                }
+            });
+
+            // Fix border radius for last button
+            buttons.day.className = buttons.day.className.replace('rounded-l-lg', 'rounded-r-lg');
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initCalendar);
+
+        // Real-time updates simulation
+        function updateUpcomingTasks() {
+            // Simulate real-time task updates
+            const tasks = document.querySelectorAll('[class*="bg-error-50"], [class*="bg-warning-50"], [class*="bg-primary-50"]');
+            tasks.forEach((task, index) => {
+                if (Math.random() > 0.98) { // 2% chance of update
+                    task.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        task.style.transform = 'scale(1)';
+                    }, 200);
+                }
+            });
+        }
+
+        // Update tasks every 30 seconds
+        setInterval(updateUpcomingTasks, 30000);
+
+        // Add fade-in animation to elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.bg-white, .shadow-agricultural-md');
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    element.style.transition = 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

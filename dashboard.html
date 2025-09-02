@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Moola</title>
+    <link rel="stylesheet" href="../css/main.css" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ffarmtracke6771back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 opacity-5 pointer-events-none">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width=" 60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%232D5016" fill-opacity="0.1"><path d="M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm0 0c0 11.046 8.954 20 20 20s20-8.954 20-20-8.954-20-20-20-20 8.954-20 20z"></path></g>'); background-size: 60px 60px;"></g></div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white border-b border-border-light shadow-agricultural">
+        <div class="px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo & Brand -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="inline-flex items-center">
+                            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                                    <path d="M12 16C12 18.21 10.21 20 8 20S4 18.21 4 20C4 17.79 5.79 16 8 16S12 17.79 12 16Z"/>
+                                    <path d="M20 16C20 18.21 18.21 20 16 20S12 18.21 12 20C12 17.79 13.79 16 16 16S20 17.79 20 16Z"/>
+                                </svg>
+                            </div>
+                            <span class="text-xl font-heading font-bold text-text-primary">Moola</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="dashboard.html" class="text-primary font-medium px-3 py-2 rounded-md bg-primary-50 transition-agricultural">
+                        Dashboard
+                    </a>
+                    <a href="activity_logging.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md hover:bg-primary-50 transition-agricultural">
+                        Log Activity
+                    </a>
+                    <a href="problem_diagnosis.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md hover:bg-primary-50 transition-agricultural">
+                        Diagnose
+                    </a>
+                    <a href="farm_analytics.html" class="text-text-secondary hover:text-primary px-3 py-2 rounded-md hover:bg-primary-50 transition-agricultural">
+                        Analytics
+                    </a>
+                </nav>
+
+                <!-- User Menu & Mobile Toggle -->
+                <div class="flex items-center space-x-4">
+                    <!-- User Avatar -->
+                    <div class="relative">
+                        <button id="userMenuButton" class="flex items-center space-x-2 text-text-secondary hover:text-primary transition-agricultural">
+                            <img class="w-8 h-8 rounded-full border-2 border-primary-200" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3" alt="User Avatar" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <span class="hidden sm:block text-sm font-medium">John Farmer</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        
+                        <!-- Dropdown Menu -->
+                        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-agricultural-lg border border-border-light">
+                            <div class="py-1">
+                                <a href="javascript:void(0)" class="block px-4 py-2 text-sm text-text-secondary hover:bg-primary-50 hover:text-primary transition-agricultural">Profile Settings</a>
+                                <a href="javascript:void(0)" class="block px-4 py-2 text-sm text-text-secondary hover:bg-primary-50 hover:text-primary transition-agricultural">Farm Settings</a>
+                                <div class="border-t border-border-light"></div>
+                                <a href="login.html" class="block px-4 py-2 text-sm text-text-secondary hover:bg-primary-50 hover:text-primary transition-agricultural">Sign Out</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button id="mobileMenuButton" class="md:hidden p-2 rounded-md text-text-secondary hover:text-primary hover:bg-primary-50 transition-agricultural">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-border-light bg-white">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="dashboard.html" class="block px-3 py-2 rounded-md text-primary font-medium bg-primary-50">Dashboard</a>
+                <a href="activity_logging.html" class="block px-3 py-2 rounded-md text-text-secondary hover:text-primary hover:bg-primary-50 transition-agricultural">Log Activity</a>
+                <a href="problem_diagnosis.html" class="block px-3 py-2 rounded-md text-text-secondary hover:text-primary hover:bg-primary-50 transition-agricultural">Diagnose</a>
+                <a href="farm_analytics.html" class="block px-3 py-2 rounded-md text-text-secondary hover:text-primary hover:bg-primary-50 transition-agricultural">Analytics</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Welcome Section -->
+        <div class="mb-8">
+            <h1 class="text-2xl sm:text-3xl font-heading font-bold text-text-primary mb-2">Welcome back, John!</h1>
+            <p class="text-text-secondary">Here's what's happening on your farm today - August 25, 2025</p>
+        </div>
+
+        <!-- Health Metrics Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <!-- Active Problems Card -->
+            <div class="bg-white rounded-xl shadow-agricultural-md p-6 border border-border-light hover:shadow-agricultural-lg transition-agricultural">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-error-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-medium text-error bg-error-50 px-2 py-1 rounded-full">Urgent</span>
+                </div>
+                <h3 class="text-2xl font-heading font-bold text-text-primary mb-1">3</h3>
+                <p class="text-text-secondary text-sm">Active Problems</p>
+                <div class="mt-3 flex items-center text-xs text-error">
+                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                    2 need immediate attention
+                </div>
+            </div>
+
+            <!-- Recent Activities Card -->
+            <div class="bg-white rounded-xl shadow-agricultural-md p-6 border border-border-light hover:shadow-agricultural-lg transition-agricultural">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-medium text-success bg-success-50 px-2 py-1 rounded-full">Active</span>
+                </div>
+                <h3 class="text-2xl font-heading font-bold text-text-primary mb-1">12</h3>
+                <p class="text-text-secondary text-sm">Activities Today</p>
+                <div class="mt-3 flex items-center text-xs text-success">
+                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"/>
+                    </svg>
+                    8 completed successfully
+                </div>
+            </div>
+
+            <!-- Scheduled Tasks Card -->
+            <div class="bg-white rounded-xl shadow-agricultural-md p-6 border border-border-light hover:shadow-agricultural-lg transition-agricultural">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-medium text-warning bg-warning-50 px-2 py-1 rounded-full">Pending</span>
+                </div>
+                <h3 class="text-2xl font-heading font-bold text-text-primary mb-1">7</h3>
+                <p class="text-text-secondary text-sm">Upcoming Tasks</p>
+                <div class="mt-3 flex items-center text-xs text-warning">
+                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                    </svg>
+                    2 overdue tasks
+                </div>
+            </div>
+
+            <!-- Farm Health Score Card -->
+            <div class="bg-white rounded-xl shadow-agricultural-md p-6 border border-border-light hover:shadow-agricultural-lg transition-agricultural">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-success-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-medium text-success bg-success-50 px-2 py-1 rounded-full">Good</span>
+                </div>
+                <h3 class="text-2xl font-heading font-bold text-text-primary mb-1">78%</h3>
+                <p class="text-text-secondary text-sm">Farm Health Score</p>
+                <div class="mt-3">
+                    <div class="w-full bg-border-light rounded-full h-2">
+                        <div class="bg-success h-2 rounded-full transition-agricultural" style="width: 78%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Activity Timeline -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl shadow-agricultural-md border border-border-light">
+                    <div class="p-6 border-b border-border-light">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-lg font-heading font-semibold text-text-primary">Recent Activities</h2>
+                            <a href="activity_logging.html" class="text-primary hover:text-primary-600 text-sm font-medium transition-agricultural">View All</a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <!-- Activity Item 1 -->
+                            <div class="flex items-start space-x-4 p-4 bg-success-50 rounded-lg border border-success-200">
+                                <div class="w-10 h-10 bg-success rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-text-primary">Watering - Tomato Field A</p>
+                                    <p class="text-xs text-text-secondary mt-1">Applied 150L water with organic fertilizer mix</p>
+                                    <div class="flex items-center mt-2 text-xs text-success">
+                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Completed • 2 hours ago
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Activity Item 2 -->
+                            <div class="flex items-start space-x-4 p-4 bg-warning-50 rounded-lg border border-warning-200">
+                                <div class="w-10 h-10 bg-warning rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-text-primary">Pest Control - Corn Field B</p>
+                                    <p class="text-xs text-text-secondary mt-1">Spotted aphid infestation, applied organic spray</p>
+                                    <div class="flex items-center mt-2 text-xs text-warning">
+                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                                        </svg>
+                                        In Progress • 4 hours ago
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Activity Item 3 -->
+                            <div class="flex items-start space-x-4 p-4 bg-primary-50 rounded-lg border border-primary-200">
+                                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-text-primary">Soil Testing - Greenhouse 1</p>
+                                    <p class="text-xs text-text-secondary mt-1">pH levels and nutrient analysis completed</p>
+                                    <div class="flex items-center mt-2 text-xs text-primary">
+                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Completed • 6 hours ago
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Activity Item 4 -->
+                            <div class="flex items-start space-x-4 p-4 bg-accent-50 rounded-lg border border-accent-200">
+                                <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-text-primary">Harvest - Lettuce Rows 1-5</p>
+                                    <p class="text-xs text-text-secondary mt-1">Collected 45kg of fresh lettuce for market</p>
+                                    <div class="flex items-center mt-2 text-xs text-accent">
+                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Completed • 8 hours ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Today's Schedule -->
+                <div class="bg-white rounded-xl shadow-agricultural-md border border-border-light">
+                    <div class="p-6 border-b border-border-light">
+                        <h2 class="text-lg font-heading font-semibold text-text-primary">Today's Schedule</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <!-- Scheduled Task 1 -->
+                            <div class="flex items-center space-x-3 p-3 bg-error-50 rounded-lg border border-error-200">
+                                <div class="w-2 h-2 bg-error rounded-full flex-shrink-0"></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-text-primary">Water Greenhouse 2</p>
+                                    <p class="text-xs text-error">Overdue by 2 hours</p>
+                                </div>
+                                <span class="text-xs text-error font-medium">9:00 AM</span>
+                            </div>
+
+                            <!-- Scheduled Task 2 -->
+                            <div class="flex items-center space-x-3 p-3 bg-warning-50 rounded-lg border border-warning-200">
+                                <div class="w-2 h-2 bg-warning rounded-full flex-shrink-0"></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-text-primary">Check Irrigation System</p>
+                                    <p class="text-xs text-warning">Due in 30 minutes</p>
+                                </div>
+                                <span class="text-xs text-warning font-medium">4:00 PM</span>
+                            </div>
+
+                            <!-- Scheduled Task 3 -->
+                            <div class="flex items-center space-x-3 p-3 bg-primary-50 rounded-lg border border-primary-200">
+                                <div class="w-2 h-2 bg-primary rounded-full flex-shrink-0"></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-text-primary">Evening Harvest</p>
+                                    <p class="text-xs text-primary">Scheduled</p>
+                                </div>
+                                <span class="text-xs text-primary font-medium">6:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-xl shadow-agricultural-md border border-border-light">
+                    <div class="p-6 border-b border-border-light">
+                        <h2 class="text-lg font-heading font-semibold text-text-primary">Quick Actions</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-3">
+                            <a href="activity_logging.html" class="w-full bg-primary hover:bg-primary-600 text-white font-medium py-3 px-4 rounded-lg transition-agricultural shadow-agricultural-md hover:shadow-agricultural-lg flex items-center justify-center space-x-2 min-h-touch">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                </svg>
+                                <span>Log Activity</span>
+                            </a>
+                            
+                            <a href="problem_diagnosis.html" class="w-full bg-error hover:bg-error-600 text-white font-medium py-3 px-4 rounded-lg transition-agricultural shadow-agricultural-md hover:shadow-agricultural-lg flex items-center justify-center space-x-2 min-h-touch">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                                </svg>
+                                <span>Report Problem</span>
+                            </a>
+                            
+                            <a href="farm_analytics.html" class="w-full bg-accent hover:bg-accent-600 text-white font-medium py-3 px-4 rounded-lg transition-agricultural shadow-agricultural-md hover:shadow-agricultural-lg flex items-center justify-center space-x-2 min-h-touch">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                                <span>View Analytics</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather Widget -->
+                <div class="bg-white rounded-xl shadow-agricultural-md border border-border-light">
+                    <div class="p-6 border-b border-border-light">
+                        <h2 class="text-lg font-heading font-semibold text-text-primary">Weather Today</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-heading font-bold text-text-primary mb-1">75°F</h3>
+                            <p class="text-text-secondary text-sm mb-4">Sunny & Clear</p>
+                            <div class="grid grid-cols-2 gap-4 text-xs">
+                                <div class="text-center">
+                                    <p class="text-text-secondary">Humidity</p>
+                                    <p class="font-medium text-text-primary">65%</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-text-secondary">Wind</p>
+                                    <p class="font-medium text-text-primary">8 mph</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Agricultural Background Elements -->
+    <div class="fixed bottom-0 left-0 w-full h-32 bg-gradient-to-t from-primary-50/30 to-transparent pointer-events-none"></div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // User dropdown toggle
+        document.getElementById('userMenuButton').addEventListener('click', function() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const userMenuButton = document.getElementById('userMenuButton');
+            const userDropdown = document.getElementById('userDropdown');
+            
+            if (!userMenuButton.contains(event.target) && !userDropdown.contains(event.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
+
+        // Real-time updates simulation
+        function updateDashboard() {
+            // Simulate real-time activity updates
+            const activities = document.querySelectorAll('.space-y-4 > div');
+            activities.forEach((activity, index) => {
+                if (Math.random() > 0.95) { // 5% chance of update
+                    activity.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        activity.style.transform = 'scale(1)';
+                    }, 200);
+                }
+            });
+        }
+
+        // Update dashboard every 30 seconds
+        setInterval(updateDashboard, 30000);
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in animation to cards
+            const cards = document.querySelectorAll('.bg-white');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

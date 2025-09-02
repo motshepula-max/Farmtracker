@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Problem Diagnosis - FarmTracker Pro</title>
+    <link rel="stylesheet" href="../css/main.css" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ffarmtracke6771back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 opacity-5 pointer-events-none">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width=" 60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%232D5016" fill-opacity="0.1"><path d="M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm0 0c0 11.046 8.954 20 20 20s20-8.954 20-20-8.954-20-20-20-20 8.954-20 20z"></path></g>'); background-size: 60px 60px;"></g></div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-agricultural border-b border-border-light sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                                <path d="M12 16C12 18.21 10.21 20 8 20S4 18.21 4 20C4 17.79 5.79 16 8 16S12 17.79 12 16Z"/>
+                                <path d="M20 16C20 18.21 18.21 20 16 20S12 18.21 12 20C12 17.79 13.79 16 16 16S20 17.79 20 16Z"/>
+                            </svg>
+                        </div>
+                        <h1 class="text-xl font-heading font-bold text-text-primary">FarmTracker Pro</h1>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="dashboard.html" class="text-text-secondary hover:text-primary transition-agricultural font-medium">Dashboard</a>
+                    <a href="activity_logging.html" class="text-text-secondary hover:text-primary transition-agricultural font-medium">Activity Log</a>
+                    <a href="problem_diagnosis.html" class="text-primary font-medium border-b-2 border-primary pb-1">Problem Diagnosis</a>
+                    <a href="farm_analytics.html" class="text-text-secondary hover:text-primary transition-agricultural font-medium">Analytics</a>
+                </nav>
+
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 text-text-secondary hover:text-primary transition-agricultural">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5-5-5h5v-12"/>
+                        </svg>
+                    </button>
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-medium">F</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Page Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-heading font-bold text-text-primary mb-2">Problem Diagnosis</h1>
+                    <p class="text-text-secondary">AI-powered analysis to identify and solve plant health issues</p>
+                </div>
+                <div class="hidden md:flex items-center space-x-3">
+                    <div class="bg-success-50 text-success-700 px-3 py-1 rounded-full text-sm font-medium">
+                        AI Analysis Ready
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diagnosis Wizard -->
+        <div class="bg-white rounded-xl shadow-agricultural-lg border border-border-light">
+            <!-- Progress Bar -->
+            <div class="p-6 border-b border-border-light">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-heading font-semibold text-text-primary">Diagnosis Steps</h2>
+                    <span class="text-sm text-text-secondary">Step <span id="currentStep">1</span> of 4</span>
+                </div>
+                <div class="w-full bg-border-light rounded-full h-2">
+                    <div id="progressBar" class="bg-primary h-2 rounded-full transition-agricultural-slow" style="width: 25%"></div>
+                </div>
+                <div class="flex justify-between mt-2 text-xs text-text-secondary">
+                    <span>Plant Selection</span>
+                    <span>Symptoms</span>
+                    <span>Analysis</span>
+                    <span>Solutions</span>
+                </div>
+            </div>
+
+            <!-- Step 1: Plant Selection -->
+            <div id="step1" class="step-content p-6">
+                <div class="mb-6">
+                    <h3 class="text-xl font-heading font-semibold text-text-primary mb-2">Select Your Plant/Crop</h3>
+                    <p class="text-text-secondary">Choose the plant you're having issues with</p>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="mb-6">
+                    <div class="relative">
+                        <input type="text" id="plantSearch" placeholder="Search for plants..." class="w-full px-4 py-3 pl-10 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural" />
+                        <svg class="absolute left-3 top-3.5 w-5 h-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Plant Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
+                    <div class="plant-option cursor-pointer border-2 border-border rounded-lg p-4 hover:border-primary transition-agricultural" data-plant="tomato">
+                        <div class="aspect-square rounded-lg overflow-hidden mb-3">
+                            <img src="https://images.pexels.com/photos/1327838/pexels-photo-1327838.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Tomato Plant" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        </div>
+                        <h4 class="font-medium text-text-primary text-center">Tomato</h4>
+                    </div>
+
+                    <div class="plant-option cursor-pointer border-2 border-border rounded-lg p-4 hover:border-primary transition-agricultural" data-plant="lettuce">
+                        <div class="aspect-square rounded-lg overflow-hidden mb-3">
+                            <img src="https://images.pixabay.com/photo/2016/08/15/11/58/lettuce-1595799_1280.jpg" alt="Lettuce Plant" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        </div>
+                        <h4 class="font-medium text-text-primary text-center">Lettuce</h4>
+                    </div>
+
+                    <div class="plant-option cursor-pointer border-2 border-border rounded-lg p-4 hover:border-primary transition-agricultural" data-plant="pepper">
+                        <div class="aspect-square rounded-lg overflow-hidden mb-3">
+                            <img src="https://images.unsplash.com/photo-1583663848850-46af132dc08e?auto=format&fit=crop&w=400&q=80" alt="Pepper Plant" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        </div>
+                        <h4 class="font-medium text-text-primary text-center">Pepper</h4>
+                    </div>
+
+                    <div class="plant-option cursor-pointer border-2 border-border rounded-lg p-4 hover:border-primary transition-agricultural" data-plant="cucumber">
+                        <div class="aspect-square rounded-lg overflow-hidden mb-3">
+                            <img src="https://images.pexels.com/photos/2329440/pexels-photo-2329440.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cucumber Plant" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        </div>
+                        <h4 class="font-medium text-text-primary text-center">Cucumber</h4>
+                    </div>
+
+                    <div class="plant-option cursor-pointer border-2 border-border rounded-lg p-4 hover:border-primary transition-agricultural" data-plant="carrot">
+                        <div class="aspect-square rounded-lg overflow-hidden mb-3">
+                            <img src="https://images.pixabay.com/photo/2016/08/09/10/30/carrot-1581597_1280.jpg" alt="Carrot Plant" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        </div>
+                        <h4 class="font-medium text-text-primary text-center">Carrot</h4>
+                    </div>
+
+                    <div class="plant-option cursor-pointer border-2 border-border rounded-lg p-4 hover:border-primary transition-agricultural" data-plant="spinach">
+                        <div class="aspect-square rounded-lg overflow-hidden mb-3">
+                            <img src="https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=400&q=80" alt="Spinach Plant" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        </div>
+                        <h4 class="font-medium text-text-primary text-center">Spinach</h4>
+                    </div>
+
+                    <div class="plant-option cursor-pointer border-2 border-border rounded-lg p-4 hover:border-primary transition-agricultural" data-plant="basil">
+                        <div class="aspect-square rounded-lg overflow-hidden mb-3">
+                            <img src="https://images.pexels.com/photos/4750270/pexels-photo-4750270.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Basil Plant" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        </div>
+                        <h4 class="font-medium text-text-primary text-center">Basil</h4>
+                    </div>
+
+                    <div class="plant-option cursor-pointer border-2 border-border rounded-lg p-4 hover:border-primary transition-agricultural" data-plant="other">
+                        <div class="aspect-square rounded-lg overflow-hidden mb-3 bg-border-light flex items-center justify-center">
+                            <svg class="w-12 h-12 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-medium text-text-primary text-center">Other</h4>
+                    </div>
+                </div>
+
+                <!-- Selected Plant Display -->
+                <div id="selectedPlant" class="hidden bg-primary-50 border border-primary-200 rounded-lg p-4 mb-6">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-lg overflow-hidden mr-4">
+                            <img id="selectedPlantImage" src alt class="w-full h-full object-cover" />
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-text-primary">Selected: <span id="selectedPlantName"></span></h4>
+                            <p class="text-sm text-text-secondary">Ready to proceed to symptom description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Symptoms -->
+            <div id="step2" class="step-content hidden p-6">
+                <div class="mb-6">
+                    <h3 class="text-xl font-heading font-semibold text-text-primary mb-2">Describe the Symptoms</h3>
+                    <p class="text-text-secondary">Help us understand what's wrong with your plant</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Primary Symptom -->
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Primary Symptom</label>
+                        <select id="primarySymptom" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural">
+                            <option value>Select primary symptom...</option>
+                            <option value="yellowing-leaves">Yellowing Leaves</option>
+                            <option value="brown-spots">Brown Spots on Leaves</option>
+                            <option value="wilting">Wilting</option>
+                            <option value="stunted-growth">Stunted Growth</option>
+                            <option value="pest-damage">Pest Damage</option>
+                            <option value="root-rot">Root Rot</option>
+                            <option value="leaf-curl">Leaf Curling</option>
+                            <option value="discoloration">Discoloration</option>
+                        </select>
+                    </div>
+
+                    <!-- Severity Scale -->
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Severity Level</label>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-sm text-text-secondary">Mild</span>
+                            <div class="flex-1">
+                                <input type="range" id="severityRange" min="1" max="5" value="3" class="w-full h-2 bg-border-light rounded-lg appearance-none cursor-pointer" />
+                            </div>
+                            <span class="text-sm text-text-secondary">Severe</span>
+                            <div class="w-12 text-center">
+                                <span id="severityValue" class="text-sm font-medium text-text-primary">3</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Affected Area -->
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Affected Area</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            <label class="flex items-center p-3 border border-border rounded-lg cursor-pointer hover:border-primary transition-agricultural">
+                                <input type="checkbox" name="affectedArea" value="leaves" class="mr-2" />
+                                <span class="text-sm">Leaves</span>
+                            </label>
+                            <label class="flex items-center p-3 border border-border rounded-lg cursor-pointer hover:border-primary transition-agricultural">
+                                <input type="checkbox" name="affectedArea" value="stem" class="mr-2" />
+                                <span class="text-sm">Stem</span>
+                            </label>
+                            <label class="flex items-center p-3 border border-border rounded-lg cursor-pointer hover:border-primary transition-agricultural">
+                                <input type="checkbox" name="affectedArea" value="roots" class="mr-2" />
+                                <span class="text-sm">Roots</span>
+                            </label>
+                            <label class="flex items-center p-3 border border-border rounded-lg cursor-pointer hover:border-primary transition-agricultural">
+                                <input type="checkbox" name="affectedArea" value="fruit" class="mr-2" />
+                                <span class="text-sm">Fruit/Flowers</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Photo Upload -->
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">Upload Photos (Optional)</label>
+                        <div class="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-agricultural">
+                            <input type="file" id="photoUpload" multiple accept="image/*" class="hidden" />
+                            <label for="photoUpload" class="cursor-pointer">
+                                <svg class="mx-auto h-12 w-12 text-text-secondary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <p class="text-text-secondary">Click to upload photos or drag and drop</p>
+                                <p class="text-xs text-text-secondary mt-1">PNG, JPG up to 10MB each</p>
+                            </label>
+                        </div>
+                        <div id="uploadedPhotos" class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 hidden"></div>
+                    </div>
+
+                    <!-- Additional Notes -->
+                    <div>
+                        <label for="additionalNotes" class="block text-sm font-medium text-text-primary mb-2">Additional Notes</label>
+                        <textarea id="additionalNotes" rows="4" placeholder="Describe any other symptoms or observations..." class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural resize-none"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: AI Analysis -->
+            <div id="step3" class="step-content hidden p-6">
+                <div class="text-center">
+                    <div class="mb-6">
+                        <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg id="analysisIcon" class="w-10 h-10 text-primary animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-heading font-semibold text-text-primary mb-2">AI Analysis in Progress</h3>
+                        <p id="analysisStatus" class="text-text-secondary">Analyzing your plant symptoms...</p>
+                    </div>
+
+                    <!-- Analysis Progress -->
+                    <div class="max-w-md mx-auto mb-8">
+                        <div class="space-y-3">
+                            <div class="flex items-center text-sm">
+                                <div class="w-4 h-4 bg-success rounded-full mr-3"></div>
+                                <span class="text-text-primary">Processing uploaded images</span>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <div id="step2Indicator" class="w-4 h-4 bg-border rounded-full mr-3"></div>
+                                <span class="text-text-secondary">Comparing with plant database</span>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <div id="step3Indicator" class="w-4 h-4 bg-border rounded-full mr-3"></div>
+                                <span class="text-text-secondary">Analyzing farm activity history</span>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <div id="step4Indicator" class="w-4 h-4 bg-border rounded-full mr-3"></div>
+                                <span class="text-text-secondary">Generating recommendations</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analysis Results (Hidden initially) -->
+                    <div id="analysisResults" class="hidden text-left">
+                        <h4 class="text-lg font-heading font-semibold text-text-primary mb-4">Analysis Complete</h4>
+                        
+                        <!-- Likely Causes -->
+                        <div class="space-y-4 mb-6">
+                            <div class="bg-error-50 border border-error-200 rounded-lg p-4">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 bg-error rounded-full flex items-center justify-center mr-3">
+                                        <span class="text-white text-sm font-bold">1</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h5 class="font-medium text-error-700 mb-1">Nutrient Deficiency (85% confidence)</h5>
+                                        <p class="text-sm text-error-600">Yellowing leaves typically indicate nitrogen deficiency. Your last fertilization was 6 weeks ago, which aligns with this diagnosis.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-warning-50 border border-warning-200 rounded-lg p-4">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 bg-warning rounded-full flex items-center justify-center mr-3">
+                                        <span class="text-white text-sm font-bold">2</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h5 class="font-medium text-warning-700 mb-1">Overwatering (65% confidence)</h5>
+                                        <p class="text-sm text-warning-600">Recent watering frequency may be too high. Consider reducing watering schedule based on soil moisture levels.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-primary-50 border border-primary-200 rounded-lg p-4">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-3">
+                                        <span class="text-white text-sm font-bold">3</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h5 class="font-medium text-primary-700 mb-1">Pest Activity (35% confidence)</h5>
+                                        <p class="text-sm text-primary-600">Minor pest indicators detected. Monitor for small insects on leaf undersides.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Solutions -->
+            <div id="step4" class="step-content hidden p-6">
+                <div class="mb-6">
+                    <h3 class="text-xl font-heading font-semibold text-text-primary mb-2">Recommended Solutions</h3>
+                    <p class="text-text-secondary">Actionable steps to resolve your plant health issues</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Solution Cards -->
+                    <div class="bg-success-50 border border-success-200 rounded-lg p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-success rounded-lg flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-success-800 mb-2">Apply Nitrogen-Rich Fertilizer</h4>
+                                    <p class="text-success-700 text-sm mb-3">Use a balanced 10-10-10 NPK fertilizer to address nutrient deficiency. Apply according to package instructions.</p>
+                                    <div class="flex items-center space-x-4 text-xs text-success-600">
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            2-3 weeks to see results
+                                        </span>
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                            </svg>
+                                            Easy difficulty
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="bg-success text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-success-600 transition-agricultural min-h-touch">
+                                Schedule Activity
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-warning-50 border border-warning-200 rounded-lg p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-warning rounded-lg flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-warning-800 mb-2">Adjust Watering Schedule</h4>
+                                    <p class="text-warning-700 text-sm mb-3">Reduce watering frequency to every 3-4 days. Check soil moisture before watering.</p>
+                                    <div class="flex items-center space-x-4 text-xs text-warning-600">
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            1 week to see improvement
+                                        </span>
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                            </svg>
+                                            Easy difficulty
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="bg-warning text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-warning-600 transition-agricultural min-h-touch">
+                                Schedule Activity
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-primary-50 border border-primary-200 rounded-lg p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-primary-800 mb-2">Monitor for Pests</h4>
+                                    <p class="text-primary-700 text-sm mb-3">Inspect plants daily for 1 week. Look for small insects on leaf undersides and treat if necessary.</p>
+                                    <div class="flex items-center space-x-4 text-xs text-primary-600">
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            Daily monitoring
+                                        </span>
+                                        <span class="flex items-center">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                            </svg>
+                                            Easy difficulty
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-600 transition-agricultural min-h-touch">
+                                Schedule Activity
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 mt-8 pt-6 border-t border-border-light">
+                    <button id="scheduleAllBtn" class="flex-1 bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-600 transition-agricultural min-h-touch">
+                        Schedule All Recommended Activities
+                    </button>
+                    <button id="newDiagnosisBtn" class="flex-1 bg-white border border-border text-text-primary px-6 py-3 rounded-lg font-medium hover:bg-surface transition-agricultural min-h-touch">
+                        Start New Diagnosis
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center p-6 border-t border-border-light">
+                <button id="prevBtn" class="px-6 py-2 text-text-secondary hover:text-text-primary transition-agricultural disabled:opacity-50 disabled:cursor-not-allowed min-h-touch" disabled>
+                    ← Previous
+                </button>
+                <button id="nextBtn" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-600 transition-agricultural disabled:opacity-50 disabled:cursor-not-allowed min-h-touch" disabled>
+                    Next →
+                </button>
+            </div>
+        </div>
+
+        <!-- Recent Diagnoses -->
+        <div class="mt-8 bg-white rounded-xl shadow-agricultural-lg border border-border-light">
+            <div class="p-6 border-b border-border-light">
+                <h3 class="text-lg font-heading font-semibold text-text-primary">Recent Diagnoses</h3>
+            </div>
+            <div class="p-6">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-surface rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-lg overflow-hidden mr-4">
+                                <img src="https://images.pexels.com/photos/1327838/pexels-photo-1327838.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Tomato" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-text-primary">Tomato - Yellowing Leaves</h4>
+                                <p class="text-sm text-text-secondary">Diagnosed 2 days ago • Nutrient deficiency</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-success-100 text-success-700 px-2 py-1 rounded text-xs font-medium">Resolved</span>
+                            <button class="text-text-secondary hover:text-text-primary transition-agricultural">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-surface rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-lg overflow-hidden mr-4">
+                                <img src="https://images.pixabay.com/photo/2016/08/15/11/58/lettuce-1595799_1280.jpg" alt="Lettuce" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-text-primary">Lettuce - Brown Spots</h4>
+                                <p class="text-sm text-text-secondary">Diagnosed 1 week ago • Fungal infection</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-warning-100 text-warning-700 px-2 py-1 rounded text-xs font-medium">In Progress</span>
+                            <button class="text-text-secondary hover:text-text-primary transition-agricultural">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Navigation -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-border-light shadow-agricultural-lg">
+        <div class="flex justify-around py-2">
+            <a href="dashboard.html" class="flex flex-col items-center py-2 px-3 text-text-secondary hover:text-primary transition-agricultural">
+                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6H8V5z"/>
+                </svg>
+                <span class="text-xs">Dashboard</span>
+            </a>
+            <a href="activity_logging.html" class="flex flex-col items-center py-2 px-3 text-text-secondary hover:text-primary transition-agricultural">
+                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                </svg>
+                <span class="text-xs">Log Activity</span>
+            </a>
+            <a href="problem_diagnosis.html" class="flex flex-col items-center py-2 px-3 text-primary">
+                <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+                <span class="text-xs">Diagnose</span>
+            </a>
+            <a href="farm_analytics.html" class="flex flex-col items-center py-2 px-3 text-text-secondary hover:text-primary transition-agricultural">
+                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 00-2-2z"/>
+                </svg>
+                <span class="text-xs">Analytics</span>
+            </a>
+        </div>
+    </nav>
+
+    <script>
+        // Wizard state management
+        let currentStep = 1;
+        let selectedPlant = null;
+        const totalSteps = 4;
+
+        // DOM elements
+        const steps = document.querySelectorAll('.step-content');
+        const progressBar = document.getElementById('progressBar');
+        const currentStepSpan = document.getElementById('currentStep');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // Plant selection handling
+        document.querySelectorAll('.plant-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove previous selection
+                document.querySelectorAll('.plant-option').forEach(opt => {
+                    opt.classList.remove('border-primary', 'bg-primary-50');
+                    opt.classList.add('border-border');
+                });
+
+                // Add selection to clicked option
+                this.classList.remove('border-border');
+                this.classList.add('border-primary', 'bg-primary-50');
+
+                // Store selected plant
+                selectedPlant = this.dataset.plant;
+                
+                // Show selected plant info
+                const selectedPlantDiv = document.getElementById('selectedPlant');
+                const selectedPlantName = document.getElementById('selectedPlantName');
+                const selectedPlantImage = document.getElementById('selectedPlantImage');
+                
+                selectedPlantName.textContent = this.querySelector('h4').textContent;
+                const img = this.querySelector('img');
+                if (img) {
+                    selectedPlantImage.src = img.src;
+                    selectedPlantImage.alt = img.alt;
+                }
+                
+                selectedPlantDiv.classList.remove('hidden');
+                
+                // Enable next button
+                nextBtn.disabled = false;
+            });
+        });
+
+        // Plant search functionality
+        document.getElementById('plantSearch').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            document.querySelectorAll('.plant-option').forEach(option => {
+                const plantName = option.querySelector('h4').textContent.toLowerCase();
+                if (plantName.includes(searchTerm)) {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        });
+
+        // Severity range handling
+        const severityRange = document.getElementById('severityRange');
+        const severityValue = document.getElementById('severityValue');
+        
+        severityRange.addEventListener('input', function() {
+            severityValue.textContent = this.value;
+        });
+
+        // Photo upload handling
+        document.getElementById('photoUpload').addEventListener('change', function() {
+            const files = Array.from(this.files);
+            const uploadedPhotos = document.getElementById('uploadedPhotos');
+            
+            if (files.length > 0) {
+                uploadedPhotos.classList.remove('hidden');
+                uploadedPhotos.innerHTML = '';
+                
+                files.forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const photoDiv = document.createElement('div');
+                        photoDiv.className = 'relative';
+                        photoDiv.innerHTML = `
+                            <img src="${e.target.result}" alt="Uploaded photo ${index + 1}" class="w-full h-24 object-cover rounded-lg">
+                            <button class="absolute top-1 right-1 bg-error text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-error-600 transition-agricultural">×</button>
+                        `;
+                        uploadedPhotos.appendChild(photoDiv);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        });
+
+        // Form validation for step 2
+        function validateStep2() {
+            const primarySymptom = document.getElementById('primarySymptom').value;
+            const affectedAreas = document.querySelectorAll('input[name="affectedArea"]:checked');
+            
+            return primarySymptom && affectedAreas.length > 0;
+        }
+
+        // AI Analysis simulation
+        function runAIAnalysis() {
+            const analysisStatus = document.getElementById('analysisStatus');
+            const analysisIcon = document.getElementById('analysisIcon');
+            const analysisResults = document.getElementById('analysisResults');
+            const indicators = ['step2Indicator', 'step3Indicator', 'step4Indicator'];
+            
+            let currentIndicator = 0;
+            const messages = [
+                'Processing uploaded images...',
+                'Comparing with plant database...',
+                'Analyzing farm activity history...',
+                'Generating recommendations...',
+                'Analysis complete!'
+            ];
+            
+            const interval = setInterval(() => {
+                if (currentIndicator < indicators.length) {
+                    document.getElementById(indicators[currentIndicator]).classList.remove('bg-border');
+                    document.getElementById(indicators[currentIndicator]).classList.add('bg-success');
+                    analysisStatus.textContent = messages[currentIndicator + 1];
+                    currentIndicator++;
+                } else {
+                    clearInterval(interval);
+                    analysisIcon.classList.remove('animate-spin');
+                    analysisIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>';
+                    analysisStatus.textContent = messages[4];
+                    
+                    setTimeout(() => {
+                        analysisResults.classList.remove('hidden');
+                        nextBtn.disabled = false;
+                    }, 1000);
+                }
+            }, 1500);
+        }
+
+        // Step navigation
+        function showStep(step) {
+            // Hide all steps
+            steps.forEach(s => s.classList.add('hidden'));
+            
+            // Show current step
+            document.getElementById(`step${step}`).classList.remove('hidden');
+            
+            // Update progress
+            const progress = (step / totalSteps) * 100;
+            progressBar.style.width = `${progress}%`;
+            currentStepSpan.textContent = step;
+            
+            // Update buttons
+            prevBtn.disabled = step === 1;
+            
+            if (step === 3) {
+                nextBtn.disabled = true;
+                runAIAnalysis();
+            } else if (step === 4) {
+                nextBtn.textContent = 'Complete';
+            } else {
+                nextBtn.textContent = 'Next →';
+                nextBtn.disabled = step === 1 && !selectedPlant;
+            }
+        }
+
+        // Navigation button handlers
+        nextBtn.addEventListener('click', function() {
+            if (currentStep === 2 && !validateStep2()) {
+                alert('Please fill in the required symptom information.');
+                return;
+            }
+            
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            } else {
+                // Complete diagnosis
+                alert('Diagnosis completed! Recommended activities have been added to your schedule.');
+                window.location.href = 'dashboard.html';
+            }
+        });
+
+        prevBtn.addEventListener('click', function() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        // Solution action buttons
+        document.getElementById('scheduleAllBtn').addEventListener('click', function() {
+            alert('All recommended activities have been scheduled in your farm calendar.');
+            window.location.href = 'activity_logging.html';
+        });
+
+        document.getElementById('newDiagnosisBtn').addEventListener('click', function() {
+            currentStep = 1;
+            selectedPlant = null;
+            showStep(1);
+            
+            // Reset form
+            document.querySelectorAll('.plant-option').forEach(opt => {
+                opt.classList.remove('border-primary', 'bg-primary-50');
+                opt.classList.add('border-border');
+            });
+            document.getElementById('selectedPlant').classList.add('hidden');
+            document.getElementById('primarySymptom').value = '';
+            document.getElementById('severityRange').value = '3';
+            document.getElementById('severityValue').textContent = '3';
+            document.querySelectorAll('input[name="affectedArea"]').forEach(cb => cb.checked = false);
+            document.getElementById('additionalNotes').value = '';
+            document.getElementById('uploadedPhotos').classList.add('hidden');
+            document.getElementById('analysisResults').classList.add('hidden');
+        });
+
+        // Initialize
+        showStep(1);
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

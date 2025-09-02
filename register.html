@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account - FarmTracker Pro</title>
+    <link rel="stylesheet" href="../css/main.css" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ffarmtracke6771back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 opacity-5 pointer-events-none">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width=" 60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%232D5016" fill-opacity="0.1"><path d="M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm0 0c0 11.046 8.954 20 20 20s20-8.954 20-20-8.954-20-20-20-20 8.954-20 20z"></path></g>'); background-size: 60px 60px;"></g></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="relative min-h-screen flex items-center justify-center px-4 py-8">
+        <!-- Registration Card -->
+        <div class="w-full max-w-lg">
+            <!-- Header Section -->
+            <div class="text-center mb-8">
+                <!-- Logo -->
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-xl mb-4 shadow-agricultural-md">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                        <path d="M12 16C12 18.21 10.21 20 8 20S4 18.21 4 20C4 17.79 5.79 16 8 16S12 17.79 12 16Z"/>
+                        <path d="M20 16C20 18.21 18.21 20 16 20S12 18.21 12 20C12 17.79 13.79 16 16 16S20 17.79 20 16Z"/>
+                    </svg>
+                </div>
+                
+                <!-- Brand Name -->
+                <h1 class="text-3xl font-heading font-bold text-text-primary mb-2">FarmTracker Pro</h1>
+                <p class="text-text-secondary text-base">Join thousands of farmers improving their harvest</p>
+            </div>
+
+            <!-- Registration Form Card -->
+            <div class="bg-white rounded-xl shadow-agricultural-lg p-6 border border-border-light">
+                <!-- Form Header -->
+                <div class="mb-6">
+                    <h2 class="text-xl font-heading font-semibold text-text-primary mb-1">Create your account</h2>
+                    <p class="text-text-secondary text-sm">Start tracking your farm activities today</p>
+                </div>
+
+                <!-- Registration Form -->
+                <form id="registerForm" class="space-y-5">
+                    <!-- Personal Information Section -->
+                    <div class="space-y-4">
+                        <h3 class="text-sm font-medium text-text-primary border-b border-border-light pb-2">Personal Information</h3>
+                        
+                        <!-- Full Name -->
+                        <div>
+                            <label for="fullName" class="block text-sm font-medium text-text-primary mb-2">
+                                Full Name *
+                            </label>
+                            <input type="text" id="fullName" name="fullName" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white" placeholder="John Smith" required />
+                            <div class="text-xs text-error mt-1 hidden" id="fullNameError">Please enter your full name</div>
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-text-primary mb-2">
+                                Email Address *
+                            </label>
+                            <div class="relative">
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white pr-12" placeholder="john@example.com" required />
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+                                    <svg class="w-5 h-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="text-xs text-error mt-1 hidden" id="emailError">Please enter a valid email address</div>
+                        </div>
+
+                        <!-- Password -->
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-text-primary mb-2">
+                                Password *
+                            </label>
+                            <div class="relative">
+                                <input type="password" id="password" name="password" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white pr-12" placeholder="Create a strong password" required />
+                                <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 flex items-center pr-3 text-text-secondary hover:text-text-primary transition-agricultural">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- Password Strength Indicator -->
+                            <div class="mt-2">
+                                <div class="flex space-x-1">
+                                    <div class="h-1 flex-1 bg-border rounded" id="strength1"></div>
+                                    <div class="h-1 flex-1 bg-border rounded" id="strength2"></div>
+                                    <div class="h-1 flex-1 bg-border rounded" id="strength3"></div>
+                                    <div class="h-1 flex-1 bg-border rounded" id="strength4"></div>
+                                </div>
+                                <p class="text-xs text-text-secondary mt-1" id="strengthText">Password strength: Weak</p>
+                            </div>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div>
+                            <label for="confirmPassword" class="block text-sm font-medium text-text-primary mb-2">
+                                Confirm Password *
+                            </label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white" placeholder="Confirm your password" required />
+                            <div class="text-xs text-error mt-1 hidden" id="confirmPasswordError">Passwords do not match</div>
+                        </div>
+                    </div>
+
+                    <!-- Farm Information Section -->
+                    <div class="space-y-4">
+                        <h3 class="text-sm font-medium text-text-primary border-b border-border-light pb-2">Farm Information</h3>
+                        
+                        <!-- Farm Name -->
+                        <div>
+                            <label for="farmName" class="block text-sm font-medium text-text-primary mb-2">
+                                Farm Name *
+                            </label>
+                            <input type="text" id="farmName" name="farmName" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white" placeholder="Green Valley Farm" required />
+                        </div>
+
+                        <!-- Farm Location -->
+                        <div>
+                            <label for="farmLocation" class="block text-sm font-medium text-text-primary mb-2">
+                                Farm Location *
+                            </label>
+                            <input type="text" id="farmLocation" name="farmLocation" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white" placeholder="City, State" required />
+                        </div>
+
+                        <!-- Primary Crop Types -->
+                        <div>
+                            <label for="cropTypes" class="block text-sm font-medium text-text-primary mb-2">
+                                Primary Crop Types *
+                            </label>
+                            <select id="cropTypes" name="cropTypes" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white" required>
+                                <option value>Select your primary crops</option>
+                                <option value="vegetables">Vegetables</option>
+                                <option value="fruits">Fruits</option>
+                                <option value="grains">Grains</option>
+                                <option value="herbs">Herbs</option>
+                                <option value="mixed">Mixed Crops</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <!-- Farm Size -->
+                        <div>
+                            <label for="farmSize" class="block text-sm font-medium text-text-primary mb-2">
+                                Farm Size (Optional)
+                            </label>
+                            <select id="farmSize" name="farmSize" class="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-agricultural text-base bg-white">
+                                <option value>Select farm size</option>
+                                <option value="small">Small (< 1 acre)</option>
+                                <option value="medium">Medium (1-10 acres)</option>
+                                <option value="large">Large (10+ acres)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Privacy -->
+                    <div class="flex items-start space-x-3">
+                        <input id="terms" name="terms" type="checkbox" class="h-4 w-4 text-primary focus:ring-primary/20 border-border rounded mt-1" required />
+                        <label for="terms" class="text-sm text-text-secondary leading-relaxed">
+                            I agree to the 
+                            <a href="javascript:void(0)" class="text-primary hover:text-primary-600 font-medium transition-agricultural">Terms of Service</a> 
+                            and 
+                            <a href="javascript:void(0)" class="text-primary hover:text-primary-600 font-medium transition-agricultural">Privacy Policy</a>
+                        </label>
+                    </div>
+
+                    <!-- Create Account Button -->
+                    <button type="submit" class="w-full bg-primary hover:bg-primary-600 text-white font-medium py-3 px-4 rounded-lg transition-agricultural shadow-agricultural-md hover:shadow-agricultural-lg min-h-touch">
+                        <span id="registerText">Create Account</span>
+                        <span id="registerLoader" class="hidden">
+                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                            </svg>
+                            Creating account...
+                        </span>
+                    </button>
+
+                    <!-- Error Message -->
+                    <div id="errorMessage" class="hidden bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded-lg text-sm">
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                            </svg>
+                            <span id="errorText">Please fix the errors above and try again.</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Sign In Link -->
+            <div class="text-center mt-6">
+                <p class="text-text-secondary text-sm">
+                    Already have an account? 
+                    <a href="login.html" class="text-primary hover:text-primary-600 font-medium transition-agricultural">
+                        Sign in here
+                    </a>
+                </p>
+            </div>
+
+            <!-- Trust Signals -->
+            <div class="mt-8 pt-6 border-t border-border-light">
+                <div class="text-center">
+                    <p class="text-text-secondary text-xs mb-4">Trusted by agricultural professionals</p>
+                    <div class="flex justify-center items-center space-x-6 opacity-60">
+                        <!-- Agricultural Certification Badge -->
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-success rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <span class="text-xs text-text-secondary">Certified</span>
+                        </div>
+                        
+                        <!-- University Partnership -->
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                                </svg>
+                            </div>
+                            <span class="text-xs text-text-secondary">Edu Partner</span>
+                        </div>
+                        
+                        <!-- Community -->
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                                </svg>
+                            </div>
+                            <span class="text-xs text-text-secondary">5K+ Users</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial -->
+            <div class="mt-6 bg-primary-50 rounded-lg p-4 border border-primary-100">
+                <div class="flex items-start space-x-3">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Agricultural educator" class="w-10 h-10 rounded-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                    <div>
+                        <p class="text-sm text-text-primary italic">"FarmTracker Pro has revolutionized how my students learn agricultural practices. The activity tracking helps them understand cause and effect relationships."</p>
+                        <p class="text-xs text-text-secondary mt-2 font-medium">Dr. Sarah Johnson, Agricultural Sciences Professor</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agricultural Background Elements -->
+    <div class="fixed bottom-0 left-0 w-full h-32 bg-gradient-to-t from-primary-50/30 to-transparent pointer-events-none"></div>
+
+    <script>
+        // Password strength checker
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            const indicators = ['strength1', 'strength2', 'strength3', 'strength4'];
+            
+            // Reset all indicators
+            indicators.forEach(id => {
+                document.getElementById(id).className = 'h-1 flex-1 bg-border rounded';
+            });
+            
+            if (password.length >= 8) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password) || /[^A-Za-z0-9]/.test(password)) strength++;
+            
+            const colors = ['bg-error', 'bg-warning', 'bg-warning', 'bg-success'];
+            const texts = ['Weak', 'Fair', 'Good', 'Strong'];
+            
+            for (let i = 0; i < strength; i++) {
+                document.getElementById(indicators[i]).className = `h-1 flex-1 ${colors[strength - 1]} rounded`;
+            }
+            
+            document.getElementById('strengthText').textContent = `Password strength: ${texts[strength - 1] || 'Weak'}`;
+        }
+
+        // Password visibility toggle
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const password = document.getElementById('password');
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            
+            this.innerHTML = type === 'password' ? 
+                '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>' :
+                '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path></svg>';
+        });
+
+        // Password strength monitoring
+        document.getElementById('password').addEventListener('input', function() {
+            checkPasswordStrength(this.value);
+        });
+
+        // Password confirmation validation
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            const errorDiv = document.getElementById('confirmPasswordError');
+            
+            if (confirmPassword && password !== confirmPassword) {
+                this.classList.add('border-error');
+                errorDiv.classList.remove('hidden');
+            } else {
+                this.classList.remove('border-error');
+                errorDiv.classList.add('hidden');
+            }
+        });
+
+        // Form validation
+        function validateForm() {
+            let isValid = true;
+            const requiredFields = ['fullName', 'email', 'password', 'confirmPassword', 'farmName', 'farmLocation', 'cropTypes'];
+            
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                const errorDiv = document.getElementById(fieldId + 'Error');
+                
+                if (!field.value.trim()) {
+                    field.classList.add('border-error');
+                    if (errorDiv) errorDiv.classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    field.classList.remove('border-error');
+                    if (errorDiv) errorDiv.classList.add('hidden');
+                }
+            });
+
+            // Email validation
+            const email = document.getElementById('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email.value && !emailRegex.test(email.value)) {
+                email.classList.add('border-error');
+                document.getElementById('emailError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Password confirmation
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            if (password !== confirmPassword) {
+                document.getElementById('confirmPassword').classList.add('border-error');
+                document.getElementById('confirmPasswordError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Terms checkbox
+            const terms = document.getElementById('terms');
+            if (!terms.checked) {
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Form submission
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                document.getElementById('errorMessage').classList.remove('hidden');
+                return;
+            }
+            
+            const registerText = document.getElementById('registerText');
+            const registerLoader = document.getElementById('registerLoader');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Hide error message
+            errorMessage.classList.add('hidden');
+            
+            // Show loading state
+            registerText.classList.add('hidden');
+            registerLoader.classList.remove('hidden');
+            
+            // Simulate registration process
+            setTimeout(() => {
+                // Success - redirect to login with success message
+                localStorage.setItem('registrationSuccess', 'true');
+                window.location.href = 'login.html';
+            }, 2000);
+        });
+
+        // Real-time validation for all inputs
+        const inputs = document.querySelectorAll('input[required], select[required]');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.classList.add('border-error');
+                } else {
+                    this.classList.remove('border-error');
+                }
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.classList.contains('border-error') && this.value.trim()) {
+                    this.classList.remove('border-error');
+                }
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
