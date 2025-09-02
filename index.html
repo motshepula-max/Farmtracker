@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moola - Welcome</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .welcome-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            color: #2E7D32;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            color: #2E7D32;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .loading-text {
+            color: #4CAF50;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .redirect-info {
+            color: #888;
+            font-size: 0.9rem;
+        }
+    </style>
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Ffarmtracke6771back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body>
+    <div class="welcome-container">
+        <div class="logo">💰</div>
+        <h1>Moola</h1>
+        <p class="subtitle">Your Complete Farm Management Solution</p>
+        <div class="spinner"></div>
+        <p class="loading-text">Redirecting to Dashboard...</p>
+        <p class="redirect-info">Please wait while we prepare your farming dashboard</p>
+    </div>
+
+    <script>
+        // Show welcome screen for 2 seconds then redirect to dashboard
+        setTimeout(function() {
+            window.location.href = 'pages/dashboard.html';
+        }, 2000);
+        
+        // Fallback: If user clicks anywhere, redirect immediately
+        document.addEventListener('click', function() {
+            window.location.href = 'pages/dashboard.html';
+        });
+        
+        // Handle any potential errors
+        window.addEventListener('error', function() {
+            setTimeout(function() {
+                window.location.href = 'pages/login.html';
+            }, 1000);
+        });
+    </script>
+<script id="dhws-dataInjector" src="/public/dhws-data-injector.js"></script>
+</body>
+</html>
